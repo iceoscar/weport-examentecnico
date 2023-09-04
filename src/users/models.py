@@ -65,6 +65,8 @@ class User(AbstractUser):
     )
 
     def save(self, *args, **kwargs):
+        # request.META.HTTP_HOST
+        print(kwargs.get('request', None))
         factory = qrcode.image.svg.SvgImage
         qr_code = qrcode.make(self.id, image_factory=factory)
         file_name = 'qr_code.svg'

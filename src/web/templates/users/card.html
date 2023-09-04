@@ -1,0 +1,36 @@
+{% extends "_base.html" %}
+
+{% block title %}Empleado CARD -{% endblock %}
+
+{% block container %}
+<div class="container">
+    <div class="row">
+        <div class="card col-xs-12 col-sm-9 col-md-6 col-lg-4 mx-auto my-5 border-5 border-danger text-center">
+            <img class="card-img-top mt-5" src="{{user.qr_code.url}}" alt="qr_code">
+            <div class="header border-bottom border-danger-subtle">
+                <h2>Información de emergencia</h2>
+            </div>
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>{{user.get_full_name}}</h3>
+                </div>
+                <div class="card-text">
+                    <ul class="list-unstyled">
+                        <li>Nombre contacto emergencia</li>
+                        <li>Telefono contacto emergencia</li>
+                        <li>Tipo de Sangre: <b>{{user.type_blood}}</b></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer border-top-0 bg-body">
+                <button class="btn float-end" onclick="window.print();return false;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
