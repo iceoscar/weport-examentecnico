@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+
+{% block title %}Empleado {{object.get_full_name}} -{% endblock %}
+
+{% block container %}
+<div class="container my-5">
+    <div class="row mb-5">
+        <h1>Información del empleado</h1>
+        <div class="card col-xs-12 col-sm-9 col-md-6 col-lg-4 mx-auto my-5 border-2 border-success text-center">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>{{object.get_full_name}}</h3>
+                </div>
+                <div class="card-text">
+                    <ul class="list-unstyled">
+                        <li>Tipo de Sangre: <b>{{object.type_blood}}</b></li>
+                        <li>
+                            <table class="table">
+                                <tr>
+                                    <th>Nombre completo</th>
+                                    <th>Teléfono</th>
+                                    <th>Parentesco</th>
+                                    <th></th>
+                                </tr>
+                                {% for emergency_contact in object.emergencycontact_set.all %}
+                                <tr>
+                                    <td>{{emergency_contact.name}}</td>
+                                    <td><a href="tel:{{emergency_contact.mobile}}">{{emergency_contact.mobile}}</a></td>
+                                    <td>{{emergency_contact.relationship}}</td>
+                                    <td>
+                                        <form action="{% url 'emergency-contact-delete' employee.pk emergency_contact.pk %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-danger" value="confirm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-footer bg-body border-top-0">
+                {% if employee.is_active %}<a class="btn btn-success btn-sm" href="{% url 'employee-update' object.pk %}">Editar datos</a>{% endif %}
+                {% if employee.is_active %}<a class="btn btn-info btn-sm" href="{% url 'emergency-contact-create' object.pk %}">Agregar Contacto de emergencia</a>{% endif %}
+                {% if employee.is_active %}<a class="btn btn-primary btn-sm" href="{% url 'employee-card' object.pk %}" target="_blank">Ver QR</a>{% endif %}
+                {% if employee.is_active %}<a class="btn btn-danger btn-sm" href="{% url 'employee-delete' employee.pk %}">Baja Empleado</a>{% endif %}
+            </div>
+        </div>
+        <div class="card col-xs-12 col-sm-9 col-md-6 col-lg-4 mx-auto my-5 border-2 border-success text-center">
+            <img class="card-img-top" src="{{object.photo.url}}" alt="photo_employee">
+            <img class="card-img-bottom" src="{{object.qr_code.url}}" alt="qr_code">
+        </div>
+    </div>
+</div>
+{% endblock %}
+

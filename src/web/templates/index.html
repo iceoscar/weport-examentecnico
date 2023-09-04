@@ -22,18 +22,17 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          {% if request.user.is_rrhh %}
-          <li><a href="{% url 'user-list' %}" class="nav-link px-2 link-secondary">Lista de Empleados</a></li>
-          {% endif %}
+          <li><a href="{% url 'employee-list' %}" class="nav-link px-2 link-secondary">Lista Empleados</a></li>
+          <li><a href="{% url 'employee-create' %}" class="nav-link px-2 link-secondary">Alta Empleado</a></li>
         </ul>
 
         <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{request.user.photo.url}}" alt="mdo" width="32" height="32" class="rounded-circle" title="{{request.user}}">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+            {{request.user.username}}
           </a>
-          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-            <li><a class="dropdown-item" href="#">Editar</a></li>
-            <li><a class="dropdown-item" href="{% url 'user-card' request.user.pk %}" target="_blank">Credencial</a></li>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="">
+            <li><a class="dropdown-item" href="{% url 'employee-list' %}">Lista Empleados</a></li>
+            <li><a class="dropdown-item" href="{% url 'employee-create' %}">Alta Empleado</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesion</a></li>
           </ul>
@@ -46,7 +45,7 @@
 {% block footer %}
 <footer class="footer py-3 mt-4 border-top bg-body-secondary">
   <div class="container">
-    <div class="d-flex flex-wrap justify-content-between align-items-center ">
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
       <p class="col-md-6 mb-0 text-muted">© 2023 WEPORT - Examen Técnico, Daniel Martinez</p>
     </div>
   </div>

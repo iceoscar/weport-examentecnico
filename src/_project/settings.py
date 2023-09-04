@@ -31,7 +31,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 MAIN_APPS = [
-    'users'
+    '_project',
+    'employees',
+    'emergency_contacts'
 ]
 
 EXTRA_APPS = []
@@ -85,9 +87,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
-AUTH_USER_MODEL = 'users.User'
 
 
 # Password validation

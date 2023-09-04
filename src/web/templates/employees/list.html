@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+
+{% block title %}Empleados -{% endblock %}
+
+{% block container %}
+<div class="container my-5">
+    <div class="row mb-5">
+        <div>
+            <h1>Empleados</h1>
+            <a class="btn btn-primary float-end" href="{% url 'employee-create' %}">Alta empleado</a>
+            <table class="table">
+                <tr>
+                    <th>Empleado</th>
+                    <th>Tipo de Sangre</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for employee in object_list %}
+                <tr class="{% if not employee.is_active %}text-decoration-line-through{% endif %}">
+                    <td>{{employee.get_full_name}}</td>
+                    <td>{{employee.type_blood}}</td>
+                    <td><a class="btn btn-info" href="{% url 'employee-detail' employee.pk %}">Ver datos</a></td>
+                    <td>{% if employee.is_active %}<a class="btn btn-success" href="{% url 'employee-update' employee.pk %}">Editar datos</a>{% endif %}</td>
+                    <td>{% if employee.is_active %}<a class="btn btn-danger" href="{% url 'employee-delete' employee.pk %}">Baja Empleado</a>{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
