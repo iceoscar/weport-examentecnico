@@ -15,7 +15,7 @@ class EmergencyContact(TimeStampAbstract):
         'Nombre completo',
         max_length=128
     )
-    mobile = models.PositiveIntegerField(
+    mobile = models.PositiveBigIntegerField(
         'Celular',
     )
     relationship = models.CharField(
